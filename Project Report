@@ -1,0 +1,51 @@
+Goal of the project:  
+Create a comprehensive ranking of UFC fighters present in the data set and quantitatively compare their skill levels. Then, use the ranking to predit the results of UFC fights. 
+
+Our data sets:  
+	UFCFIGHTERS.csv: The data set of most registered UFC fighters  
+	UFCFIGHTS.csv: The data set of most UFC fights 
+
+Outcome: 
+We initially started by calculating the pre-ranking of each individual fighter using the following formula:
+Total Number of Fights ((Proportion of wins)/(Average rounds to win)-(Proportion of losses)/(Average rounds to lose))
+We were then able to determine the absolute ranking of each fighter based on the following model: 
+PR(fighter)+∑^wins▒(⁡〖(PR(opponents))/(PR(fighter))〗 ) -∑^losses▒(⁡〖(PR(fighter))/(PR(opponents))〗 ) 
+After calculating the absolute ranking of each fighter, we assigned an ordinal ranking to each fighter based on absolute rankings in descending order.  We were then able to use this absolute ranking to determine relative rankings as follows: 
+ph(h(f2)-h(f1))+pw(w(f2)-w(f2))+pa(a(f2)-a(f1))+pAR(AR(f2)-AR(f1))
+In the above model, the various p's represent how important we think that aspect of a fight is to winning the fight.  All of the p’s will add up to a total proportion of one.  h represents a fighter’s height, w represents a fighter’s weight, a represents a fighter’s age, and AR represents a fighter’s Absolute Rating.  The relative ranking determines which fighter out of two given fighters would win in a hypothetical fight.  We then were able to determine the probability of one fighter beating another in a hypothetical fight using the following model: 
+total-rating= ph(h(f1))+pw(w(f1))-pa(a(f1))+pAR(AR(f1))
+Where the total-rating represents the rating of one fighter (f1).  We then calculated the probability of fighter 1 winning in a hypothetical fight as follows: 
+p=(total-rating (f1))/(total-rating(f1)+total-rating(f2))*100
+Overall, we were able to complete our satisficing outcome of determining which of two fighters would win in a hypothetical fight.  We also were able to slightly delve into our reach outcome by adding the probability of each fighter winning in a hypothetical fight. 
+ 
+ 
+How to run our code: 
+	Download Data Sets
+	Adjust the hard coding of each file to reflect the path to the data on your own computer
+	Hit run in DrRacket 
+	Wait
+	Observe the loading message  
+	To find the pre-ranking of a fighter based on win-loss ratio, call (pre-individual-ranking “name”). Sorted-ranking gives a list of fighters with their pre-ranking. 
+	To get the names of fighters that a given fighter beat, call (fighter-wins “name”). To get the names of fighters a given fighter lost to, call (fighter-losses “name”). 
+	To see the absolute ranking earned by a fighter, call (absolute-ranking-fighter “name”). Sorted-absolute-list is a list of fighters sorted by descending score. 
+	To get the ordinal ranking of a fighter based on their absolute ranking, call (ranking? “name”). added-ranking is the list of fighters with their absolute ranking and ordinal ranking.  
+	To know the most likely outcome of a fight between fighter1 and fighter2, call (UFC-fight “name1” “name2”).  
+	To get the probability of fighter1 beating fighter2 in a fight, call (winning-probability “name1” “name2”). 
+
+
+Here is a list of UFC fighters you could use as examples to test the code:
+“Anderson Silva” 
+“Andrei Semenov” 
+“Georges St. Pierre” 
+“Gerald Harris” 
+“Jon Jones” 
+“Josh Haynes” 
+“Stipe Miocic” 
+“Travis Browne” 
+“Tito Ortiz” 
+“Todd Medina” 
+“Rich Franklin” 
+“Conor McGregor” 
+“Jose Aldo” 
+“Matt Hughes” 
+“Nate Diaz” 
